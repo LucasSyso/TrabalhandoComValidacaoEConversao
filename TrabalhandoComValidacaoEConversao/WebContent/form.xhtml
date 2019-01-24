@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 	xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:f="http://xmlns.jcp.org/jsf/core"
+		xmlns:h="http://xmlns.jcp.org/jsf/html"
+		xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Formulario</title>
+	<h:outputStylesheet library="css" name="styles.css"/>
+</h:head>
+<h:body>
+	<h:form>
+		<!-- <h:messages></h:messages> --><!-- Tag que o JSF utiliza para apresentar todas as mensagens de erro juntas. Normalmente usada em desenvolvimento -->
+		<h:panelGrid columns="3" columnClasses="label">
+			<h:outputLabel value="Número Inteiro:"/>
+			<h:inputText id="numeroInteiro" value="#{form.numeroInteiro}" styleClass="text"/>
+			<h:message for="numeroInteiro"/>
+			
+			<h:outputLabel value="Número Decimal:"/>
+			<h:inputText id="numeroDecimal" value="#{form.numeroDecimal}" styleClass="text"/>
+			<h:message for="numeroDecimal"/>
+			
+			<h:outputLabel value="Caracter:"/>
+			<h:inputText id="caracter" value="#{form.caractere}" styleClass="text"/>
+			<h:message for="caracter"/>
+			
+			<h:outputLabel value="Data (dd/mm/yyyy):"/>
+			<h:inputText id="data" value="#{form.data}" styleClass="text">
+				<f:convertDateTime pattern="dd/MM/yyyy"/><!-- O JSF precisa saber qual o padrão de conversão de datas desejado. -->
+				<f:validator validatorId="dateValidator"/>
+			</h:inputText>
+			<h:message for="data"/>
+			
+			<h:outputLabel value="Opção (OP_1/OP_2)"/>
+			<h:inputText id="opcao" value="#{form.opcao}" styleClass="text"/>
+			<h:message for="opcao"/>
+			
+			<h:outputLabel value="Endereço:"/>
+			<h:inputText id="endereco" value="#{form.endereco}" styleClass="text"/>
+			<h:message for="endereco"/>
+			
+			<h:outputLabel value="Nome:"/>
+			<h:inputText id="nome" value="#{form.nome}" styleClass="text" required="true">
+				<f:validateLength minimum="5" maximum="30"/>
+			</h:inputText>
+			<h:message for="nome"/>
+			
+			<h:outputLabel value="Idade:"/>
+			<h:inputText id="idade" value="#{form.idade}" styleClass="text">
+				<f:validateRequired /><!-- Tag que funciona da mesma forma que o atribuito required="true" -->
+				<f:validateLongRange minimum="1" maximum="100"/>
+			</h:inputText>
+			<h:message for="idade"/>
+			
+			<h:commandButton value="Processar" action="#{form.processar}" styleClass="button"/>
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>
